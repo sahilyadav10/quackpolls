@@ -1,0 +1,13 @@
+.create-page-wrapper {
+  min-height: 100vh;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10vh;
+}
+
+.create-form-wrapper {
+  min-width: 60%;
+  margin: 0 auto;
+}

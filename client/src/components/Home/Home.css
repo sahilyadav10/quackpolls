@@ -1,0 +1,45 @@
+.home-page-wrapper {
+  min-height: 90vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.4)
+    ),
+    url("../../static/home.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: #fafafa;
+}
+.home-header-wrapper {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-header {
+  font-size: 4em;
+  font-weight: 600;
+  color: #222222;
+}
+
+.create {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.blue {
+  color: #007bff;
+}
+.green {
+  color: #28a745;
+}
+.create-btn {
+  color: #fafafa !important;
+}
+.create-btn:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.create {
+  font-size: 1.5em !important;
+}

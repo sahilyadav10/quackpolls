@@ -1,0 +1,36 @@
+.results-page-wrapper {
+  min-height: 100vh;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10vh;
+}
+.results-poll-wrapper {
+  min-width: 60%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.results-poll-question {
+  min-width: 70%;
+}
+
+.results-poll-options {
+  margin: 0px;
+  padding: 0px;
+  min-width: 70%;
+}
+
+.results-poll-option {
+  display: flex;
+  padding: 30px;
+  margin: 2%;
+  background: white;
+  border: 1px solid #d6d6d6;
+  box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  transition: 0.2s all;
+}
+h3 {
+  font-size: medium;
+}

@@ -1,0 +1,11 @@
+.results-poll-bar {
+  height: 15px;
+  width: 100%;
+  background-color: #f3e5df;
+  border-radius: 50px;
+  margin: 10px;
+}
+.poll-bar {
+  height: 15px;
+  border-radius: 50px;
+}
