@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-theme-dark: red;
+  --color-primary: red;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  font-family: var(--font-openSans);
+  @apply bg-neutral-50;
+}
+
+.dark {
+  @apply bg-theme-dark;
+}
+
+
