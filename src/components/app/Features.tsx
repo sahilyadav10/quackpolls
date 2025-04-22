@@ -18,14 +18,14 @@ export default function Features() {
           type="feature"
           icon={<HiLightningBolt color="#2563EB" size={30} />}
           heading="Lightning Fast Setup"
-          description="Create and share polls in seconds. No more waddling around!"
+          description="Get your polls out quack-ly! Stop the waddling and start the paddling."
           className="flex-1/3"
         />
         <Card
           type="feature"
           icon={<HiChartPie color="#10B981" size={30} />}
           heading="Real-time Results"
-          description="Watch the responses roll in like ducks to water!"
+          description="Get ready for a flood of responses OR Watch those responses come splashing in"
           className="flex-1/3"
         />
         <Card

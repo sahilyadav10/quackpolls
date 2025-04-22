@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
 
         <div>
-          <span>Made by </span>
+          <span>Made with </span>
           <Link
             href="https://sahilten.com"
             target="_blank"

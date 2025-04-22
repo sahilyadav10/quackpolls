@@ -21,11 +21,11 @@ export default function Home() {
       <div className="flex gap-10 flex-col w-full lg:w-auto">
         <div className="flex gap-2 flex-col">
           <h2 className="font-bold text-4xl">
-            QuackPolls &apos;Where opinions hatch&apos;
+            QuackPolls — Where Opinions Hatch
           </h2>
           <p>
-            Dive into a world where your voice quacks the loudest. Join the
-            flock, cast your vote, or start your own poll.
+            Dive in and let your quack echo across the pond! Cast your vote or
+            set sail with your own poll!
           </p>
         </div>
         <div className="flex gap-2">
