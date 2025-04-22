@@ -9,11 +9,11 @@ export default function Features() {
   return (
     <Section
       id="features"
-      className="flex gap-2 flex-wrap lg:flex-nowrap"
+      className="flex gap-2"
       withSpacing
       title="Quacktastic Features"
     >
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap md:flex-nowrap">
         <Card
           type="feature"
           icon={<HiLightningBolt color="#2563EB" size={30} />}
