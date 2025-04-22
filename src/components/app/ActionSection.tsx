@@ -6,7 +6,7 @@ export default function ActionSection() {
   return (
     <Section
       id="home"
-      className="items-center gap-6 py-20 bg-neutral-100 text-center"
+      className="items-center gap-6 py-20 bg-primary/5 text-center"
       withSpacing
     >
       <h2 className="text-4xl font-bold">Ready to Make Your Polls Quack?</h2>

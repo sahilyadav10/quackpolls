@@ -33,14 +33,14 @@ const Footer = () => {
         </div>
 
         <div>
-          <span>Made with </span>
+          <span>Made by </span>
           <Link
             href="https://sahilten.com"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium"
           >
-            ♥️ Sahil Yadav
+            🦆 <span className="font-extralight!">& </span>Sahil Yadav
           </Link>
         </div>
       </div>

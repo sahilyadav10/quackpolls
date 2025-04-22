@@ -20,7 +20,7 @@ export default function Section({
   return (
     <div
       className={`flex flex-col gap-2 ${
-        withSpacing ? "p-4 my-10" : ""
+        withSpacing ? "p-4 mt-10 mb-20" : ""
       } ${className}`}
       id={id}
     >
