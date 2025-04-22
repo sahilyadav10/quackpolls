@@ -10,7 +10,7 @@ import HamburgerIcon from "@/components/icons/HamburgerIcon";
 const navItems = [
   { label: "Home", href: "/#home" },
   { label: "Features", href: "/#features" },
-  { label: "Flow", href: "/#flow" },
+  { label: "How It Works", href: "/#howitworks" },
 ];
 
 export default function Navbar() {

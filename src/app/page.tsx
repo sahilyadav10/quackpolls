@@ -1,7 +1,8 @@
 import Features from "@/components/app/Features";
 import Home from "@/components/app/Home";
-import Flow from "@/components/app/Flow";
 import ActionSection from "@/components/app/ActionSection";
+import Footer from "@/components/app/Footer";
+import HowItWorks from "@/components/app/HowItWorks";
 
 export default function Page() {
   return (
@@ -9,7 +10,8 @@ export default function Page() {
       <Home />
       <Features />
       <ActionSection />
-      <Flow />
+      <HowItWorks />
+      <Footer />
     </>
   );
 }

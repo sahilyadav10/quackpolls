@@ -5,18 +5,18 @@ import Section from "../generic/layout/Section";
 const HowItWorks = () => {
   const steps = [
     {
-      icon: <HiDocument color="#2563EB" size={30} />, // Replace with actual icons as needed
+      icon: <HiDocument color="#2563EB" size={40} />, // Replace with actual icons as needed
       title: "Create Your Poll",
       description: "Choose from multiple question types and design options",
     },
     {
-      icon: <HiShare color="#F5B226" size={30} />,
+      icon: <HiShare color="#F5B226" size={40} />,
       title: "Share with Your Audience",
       description:
         "Distribute your poll via email, social media, or embed it on your website.",
     },
     {
-      icon: <HiChartBar color="#10B981" size={30} />,
+      icon: <HiChartBar color="#10B981" size={40} />,
       title: "Analyze the Results",
       description:
         "Use our real-time analytics to understand responses and make informed decisions.",
@@ -25,8 +25,8 @@ const HowItWorks = () => {
 
   return (
     <Section id="flow" className="flex gap-2 relative" withSpacing title="Flow">
-      <div className="flex gap-6 flex-col">
-        <hr className="absolute -left-12 top-38 text-neutral-600 w-[160px] rotate-90" />
+      <div className="flex gap-6 flex-col justify-center">
+        <hr className="absolute -left-11 top-38 text-neutral-600 w-[160px] rotate-90" />
         {steps.map((step, index) => (
           <div key={index} className="flex items-start gap-4">
             <div className="z-10 py-1 bg-neutral-50">{step.icon}</div>
