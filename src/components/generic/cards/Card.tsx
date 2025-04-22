@@ -1,13 +1,27 @@
-type CardType = "stat";
+import FeatureCard from "./FeatureCard";
 
-type CardWrapper = {
-  type: CardType;
-  createdOn?: string;
+type CardWrapper = FeatureCardWrapper;
+
+type FeatureCardWrapper = {
+  type: "feature";
+  icon: React.ReactNode;
+  heading: string;
+  description: string;
+  className?: string;
 };
 
-export default function Card({ type }: CardWrapper) {
-  switch (type) {
-    case "stat":
-      return <></>;
+export type FeatureCardProps = Omit<FeatureCardWrapper, "type">;
+
+export default function Card(props: CardWrapper) {
+  switch (props.type) {
+    case "feature":
+      return (
+        <FeatureCard
+          icon={props.icon}
+          heading={props.heading}
+          description={props.description}
+          className={props.className}
+        />
+      );
   }
 }
