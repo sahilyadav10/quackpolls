@@ -8,17 +8,19 @@ export default function Home() {
   return (
     <Section
       id="home"
-      className="flex-row items-center gap-10 pt-2 flex-wrap lg:flex-nowrap"
+      className="flex-row items-center gap-10 pt-2 flex-wrap md:flex-nowrap"
       withSpacing
     >
       <Image
         src={"/home_ducks.png"}
         width={500}
-        height={300}
-        className="rounded-2xl w-full lg:w-auto"
+        height={500}
+        sizes="(max-width: 768px) 100vw, 500px"
+        className="rounded-2xl w-full md:w-auto"
         alt="ducks"
+        priority
       />
-      <div className="flex gap-10 flex-col w-full lg:w-auto">
+      <div className="flex gap-10 flex-col w-full md:w-auto">
         <div className="flex gap-2 flex-col">
           <h2 className="font-bold text-4xl">
             QuackPolls — Where Opinions Hatch
