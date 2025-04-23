@@ -1,21 +1,24 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import Logo from "@/components/icons/Logo";
 import Button from "@/components/generic/Button";
 import HamburgerIcon from "@/components/icons/HamburgerIcon";
-import { scrollToSection } from "@/utils/scroll";
 import Banner from "../app/Banner";
+import useNavigation from "@/hooks/useNavigation";
 
 const navItems = [
-  { label: "Home", href: "home" },
-  { label: "Features", href: "features" },
-  { label: "How It Works", href: "howitworks" },
+  { label: "Home", href: "/#home" },
+  { label: "Features", href: "/#features" },
+  { label: "How It Works", href: "/#howitworks", isNewPage: false },
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { handleNavClick } = useNavigation(navItems);
 
   return (
     <div className="fixed top-0 left-0 right-0 bg-neutral-50 z-50 w-full">
@@ -36,7 +39,11 @@ export default function Navbar() {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection(item.href);
+                  if (item.isNewPage) {
+                    router.push(item.href);
+                  } else {
+                    handleNavClick(e, item.href);
+                  }
                 }}
                 className="font-medium text-neutral-900 hover:text-neutral-700"
                 role="button"
@@ -72,8 +79,11 @@ export default function Navbar() {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
+                  if (item.isNewPage) {
+                    router.push(item.href);
+                  } else {
+                    handleNavClick(e, item.href);
+                  }
                   setIsMobileMenuOpen(false);
                 }}
                 role="button"
