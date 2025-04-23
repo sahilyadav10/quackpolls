@@ -1,23 +1,33 @@
 "use client";
-import Link from "next/link";
-
 import Button from "@/components/generic/Button";
+import Section from "@/components/generic/layout/Section";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center gap-8 p-8">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-primary mb-4">404</h1>
-        <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 mb-2">
-          Well, this isn’t the route I planned.
+    <Section
+      className="items-center justify-center flex-row! flex-wrap! md:flex-nowrap! gap-4"
+      withSpacing
+      id="404"
+    >
+      <Image
+        src="/404_duck.png"
+        alt="Lost Duck"
+        width={400}
+        height={400}
+        priority
+        className="rounded-2xl w-full md:w-auto mix-blend-luminosity"
+      />
+      <div className="flex gap-4 flex-col items-center">
+        <h2 className="font-bold text-center text-4xl">
+          This page has quacked under pressure.
         </h2>
-        <p className="text-neutral-600 dark:text-neutral-400">
-          ge But hey, at least the styling still works.
-        </p>
+
+        <Link href="/">
+          <Button> Go home</Button>
+        </Link>
       </div>
-      <Link href="/">
-        <Button>Return Home</Button>
-      </Link>
-    </div>
+    </Section>
   );
 }
