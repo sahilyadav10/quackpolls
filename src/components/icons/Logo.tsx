@@ -17,7 +17,7 @@ export default function Logo({
         fillRule="evenodd"
         clipRule="evenodd"
         d="M0 0H12L10 6L12 12H0L2 6L0 0V0Z"
-        fill="#171712"
+        fill="#F5B226"
       />
     </svg>
   );
