@@ -6,6 +6,7 @@ import Logo from "@/components/icons/Logo";
 import Button from "@/components/generic/Button";
 import HamburgerIcon from "@/components/icons/HamburgerIcon";
 import { scrollToSection } from "@/utils/scroll";
+import Banner from "../app/Banner";
 
 const navItems = [
   { label: "Home", href: "home" },
@@ -18,6 +19,7 @@ export default function Navbar() {
 
   return (
     <div className="fixed top-0 left-0 right-0 bg-neutral-50 z-50 w-full">
+      <Banner />
       <div className="flex items-center justify-between py-3 px-4 border-b border-neutral-400 max-w-7xl mx-auto">
         <div className="flex items-center justify-between gap-4 md:gap-20 w-full">
           <div>
