@@ -1,20 +1,19 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import Logo from "@/components/icons/Logo";
 import Button from "@/components/generic/Button";
 import HamburgerIcon from "@/components/icons/HamburgerIcon";
+import { scrollToSection } from "@/utils/scroll";
 
 const navItems = [
-  { label: "Home", href: "/#home" },
-  { label: "Features", href: "/#features" },
-  { label: "How It Works", href: "/#howitworks" },
+  { label: "Home", href: "home" },
+  { label: "Features", href: "features" },
+  { label: "How It Works", href: "howitworks" },
 ];
 
 export default function Navbar() {
-  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -33,10 +32,11 @@ export default function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => {
-                  router.push(item.href);
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.href);
                 }}
-                className={`font-medium transition-colors ${"text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
+                className="font-medium text-neutral-900 hover:text-neutral-700"
                 role="button"
                 tabIndex={0}
               >
@@ -69,10 +69,9 @@ export default function Navbar() {
               <a
                 key={item.label}
                 href={item.href}
-                className={`font-medium transition-colors ${"text-neutral-900 dark:text-neutral-50 hover:text-neutral-700 dark:hover:text-neutral-300"}`}
-                onClick={() => {
-                  router.push(item.href);
-
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.href);
                   setIsMobileMenuOpen(false);
                 }}
                 role="button"

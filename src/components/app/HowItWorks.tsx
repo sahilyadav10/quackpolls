@@ -4,30 +4,30 @@ import { FaPaperPlane } from "react-icons/fa";
 import Section from "../generic/layout/Section";
 import { FaPencil } from "react-icons/fa6";
 
-const HowItWorks = () => {
-  const steps = [
-    {
-      icon: <FaPencil color="#2563EB" size={30} />,
-      title: "Create Your Poll",
-      description: "Choose from multiple question types and design options",
-    },
-    {
-      icon: <FaPaperPlane color="#F5B226" size={30} />,
-      title: "Share with Your Audience",
-      description:
-        "Distribute your poll via email, social media, or embed it on your website.",
-    },
-    {
-      icon: <HiChartBar color="#10B981" size={30} />,
-      title: "Analyze the Results",
-      description:
-        "Use our real-time analytics to understand responses and make informed decisions.",
-    },
-  ];
+const steps = [
+  {
+    icon: <FaPencil color="#2563EB" size={30} />,
+    title: "Create Your Poll",
+    description: "Choose from multiple question types and design options",
+  },
+  {
+    icon: <FaPaperPlane color="#F5B226" size={30} />,
+    title: "Share with Your Audience",
+    description:
+      "Distribute your poll via email, social media, or embed it on your website.",
+  },
+  {
+    icon: <HiChartBar color="#10B981" size={30} />,
+    title: "Analyze the Results",
+    description:
+      "Use our real-time analytics to understand responses and make informed decisions.",
+  },
+];
 
+const HowItWorks = () => {
   return (
     <Section
-      id="flow"
+      id="howitworks"
       className="flex gap-2 relative"
       withSpacing
       title="How It Works"
