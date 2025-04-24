@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 
 import "./globals.css";
 import { websiteMetadata } from "@/utils/metadata";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const metadata: Metadata = websiteMetadata;
 
@@ -12,6 +13,8 @@ const openSans = Open_Sans({
   variable: "--font-openSans",
 });
 
+const queryClient = new QueryClient();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${openSans.variable}`}>
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </html>
   );
 }
