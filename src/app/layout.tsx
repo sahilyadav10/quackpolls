@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
+import { Provider } from "react-redux";
 
 import "./globals.css";
 import { websiteMetadata } from "@/utils/metadata";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { store } from "@/store";
 
 export const metadata: Metadata = websiteMetadata;
 
@@ -22,7 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${openSans.variable}`}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </Provider>
     </html>
   );
 }

@@ -3,13 +3,13 @@ import { ButtonHTMLAttributes, MouseEvent } from "react";
 type ButtonVariant = "primary" | "secondary";
 type ButtonSize = "sm" | "md";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
   isLoading?: boolean;
   href?: string;
-}
+};
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:

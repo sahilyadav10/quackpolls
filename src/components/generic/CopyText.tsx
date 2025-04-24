@@ -3,10 +3,10 @@ import { MouseEvent, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { MdOutlineCopyAll } from "react-icons/md";
 
-interface CopyTextProps {
+type CopyTextProps = {
   text: string;
   className?: string;
-}
+};
 
 export default function CopyText({ text, className }: CopyTextProps) {
   const [copied, setCopied] = useState(false);
