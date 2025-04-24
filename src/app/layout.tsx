@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 import { websiteMetadata } from "@/utils/metadata";
 import { ReduxProvider } from "@/components/providers/ReduxProvider";
@@ -22,7 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${openSans.variable}`}>
       <ReduxProvider>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <body>
+            <ToastContainer
+              position="top-center"
+              autoClose={3000}
+              hideProgressBar={false}
+              pauseOnHover
+            />{" "}
+            {children}
+          </body>
+        </ReactQueryProvider>
       </ReduxProvider>
     </html>
   );

@@ -9,10 +9,8 @@ export default function RootLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-1 w-full md:mx-auto my-5 md:max-w-4xl xl:max-w-5xl pt-16">
-        <Navbar />
-        {children}
+        Hello {children}
       </div>
-      <Footer />
     </div>
   );
 }
