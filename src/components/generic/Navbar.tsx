@@ -8,6 +8,7 @@ import Button from "@/components/generic/Button";
 import HamburgerIcon from "@/components/icons/HamburgerIcon";
 import Banner from "../app/Banner";
 import useNavigation from "@/hooks/useNavigation";
+import { routes } from "@/lib/routes";
 
 const navItems = [
   { label: "Home", href: "/#home" },
@@ -53,8 +54,21 @@ export default function Navbar() {
               </a>
             ))}
             <div className="flex gap-2">
-              <Button>Waddle In</Button>
-              <Button variant="secondary">Start a Poll</Button>
+              <Button
+                onClick={() => {
+                  router.push(routes.signUp.pathname);
+                }}
+              >
+                Waddle In
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  router.push(routes.signIn.pathname);
+                }}
+              >
+                Start a Poll
+              </Button>
             </div>
           </div>
         </div>
@@ -92,8 +106,21 @@ export default function Navbar() {
                 {item.label}{" "}
               </a>
             ))}
-            <Button>Waddle In</Button>
-            <Button variant="secondary">Start a Poll</Button>
+            <Button
+              onClick={() => {
+                router.push(routes.signUp.pathname);
+              }}
+            >
+              Waddle In
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                router.push(routes.signIn.pathname);
+              }}
+            >
+              Start a Poll
+            </Button>
           </div>
         </div>
       </div>

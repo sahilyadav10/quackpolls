@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Section from "@/components/generic/layout/Section";
 import Button from "@/components/generic/Button";
+import { routes } from "@/lib/routes";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <Section
       id="home"
@@ -31,8 +34,21 @@ export default function Home() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button>Waddle In</Button>
-          <Button variant="secondary">Start a Poll</Button>
+          <Button
+            onClick={() => {
+              router.push(routes.signIn.pathname);
+            }}
+          >
+            Waddle In
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              router.push(routes.signUp.pathname);
+            }}
+          >
+            Start a Poll
+          </Button>
         </div>
       </div>
     </Section>
