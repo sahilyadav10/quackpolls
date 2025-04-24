@@ -4,44 +4,29 @@ import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 import Button from "@/components/generic/Button";
 import Input from "@/components/generic/Input";
 import Logo from "@/components/icons/Logo";
 import { routes } from "@/lib/routes";
+import { useAuth } from "@/hooks/useAuth";
+import { SignUpData } from "@/service/auth";
+import { signUpValidation } from "@/lib/validations";
 
-const schema = yup.object().shape({
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
-  email: yup
-    .string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-    )
-    .required("Password is required"),
-  age: yup
-    .number()
-    .typeError("Age must be a number")
-    .min(13, "Please enter a valid age")
-    .max(100, "Please enter a valid age")
-    .required("Age is required"),
-  gender: yup.string().required("Gender is required"),
-});
+const schema: yup.ObjectSchema<SignUpData> = signUpValidation;
 
-type InputFields = yup.InferType<typeof schema>;
+type FormData = yup.InferType<typeof schema>;
 
 export default function SignUpPage() {
+  const router = useRouter();
+  const { signUp, isAuthenticated, error, isLoading } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputFields>({
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       firstName: "",
@@ -53,12 +38,22 @@ export default function SignUpPage() {
     },
   });
 
-  const onSubmit: SubmitHandler<InputFields> = (data) => {
-    console.log(data);
-    // TODO: Implement sign up logic
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push(routes.dashboard.pathname);
+    }
+  }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { toastId: "sign-up-error" });
+    }
+  }, [error]);
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await signUp(data);
   };
 
-  const router = useRouter();
   return (
     <div className="flex items-center justify-center h-screen p-8">
       <div className="flex gap-4 justify-between p-4 md:p-8 rounded-2xl items-center bg-neutral-50 shadow-2xl w-full md:max-w-3xl">
@@ -117,7 +112,11 @@ export default function SignUpPage() {
                 error={errors.gender?.message}
               />
             </div>
-            <Button type="submit" className="justify-center mt-4">
+            <Button
+              type="submit"
+              className="justify-center mt-4"
+              isLoading={isLoading}
+            >
               Sign Up
             </Button>
             <p className="text-sm">

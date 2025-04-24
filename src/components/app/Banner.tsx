@@ -1,6 +1,7 @@
+"use client";
 export default function Banner() {
   return (
-    <div className="gradient-animation text-sm font-semibold text-neutral-800 text-center py-1 px-2 text-center">
+    <div className="gradient-animation text-sm font-semibold text-neutral-800 text-center py-1 px-2">
       Work in progress. Bugs included.{" "}
       <span
         className="underline cursor-pointer hover:opacity-80 transition-opacity"

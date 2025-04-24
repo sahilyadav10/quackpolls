@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { routes } from "./routes";
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -17,7 +18,7 @@ const createClient = () => {
     (response) => response,
     (error) => {
       if (error.response?.status === 401) {
-        window.location.href = "/sign-in";
+        window.location.href = routes.signIn.pathname;
       }
       return Promise.reject(error);
     }

@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, MouseEvent } from "react";
+import LoadingSpinner from "./Loader";
 
 type ButtonVariant = "primary" | "secondary";
 type ButtonSize = "sm" | "md";
@@ -30,6 +31,7 @@ export default function Button({
   fullWidth = false,
   href,
   className = "",
+  isLoading,
   ...props
 }: ButtonProps) {
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -46,12 +48,17 @@ export default function Button({
         ${sizeStyles[size]}
         ${fullWidth ? "w-full" : ""}
         ${className}
+        ${
+          props.disabled
+            ? "opacity-50 hover:cursor-default! hover:shadow-none!"
+            : ""
+        }
       `}
       onClick={handleClick}
-      disabled={props.disabled}
+      disabled={props.disabled || isLoading}
       {...props}
     >
-      {children}
+      {isLoading ? <LoadingSpinner /> : <>{children}</>}
     </button>
   );
 }

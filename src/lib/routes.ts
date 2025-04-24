@@ -12,6 +12,10 @@ export const routes = {
     pathname: "/sign-up",
     label: "Sign Up",
   },
+  dashboard: {
+    pathname: "/dashboard",
+    label: "Dashboard",
+  },
 } as const;
 
 export const getRoute = (pathname: string): Route | undefined => {
