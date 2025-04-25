@@ -1,5 +1,4 @@
-import Navbar from "@/components/generic/Navbar";
-import Footer from "@/components/app/Footer";
+import Sidebar from "@/components/generic/Sidebar";
 
 export default function RootLayout({
   children,
@@ -7,9 +6,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="flex-1 w-full md:mx-auto my-5 md:max-w-4xl xl:max-w-5xl pt-16">
-        Hello {children}
+    <div className="min-h-screen flex">
+      <Sidebar />
+      <div className="w-full md:mx-auto my-5 md:max-w-4xl xl:max-w-5xl">
+        {children}
       </div>
     </div>
   );
