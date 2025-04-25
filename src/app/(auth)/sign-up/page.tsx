@@ -14,14 +14,15 @@ import { routes } from "@/lib/routes";
 import { useAuth } from "@/hooks/useAuth";
 import { SignUpData } from "@/service/auth";
 import { signUpValidation } from "@/lib/validations";
+import { useUser } from "@/hooks/useUser";
 
 const schema: yup.ObjectSchema<SignUpData> = signUpValidation;
-
 type FormData = yup.InferType<typeof schema>;
 
 export default function SignUpPage() {
   const router = useRouter();
   const { signUp, isAuthenticated, error, isLoading } = useAuth();
+  const { isUserLoading, error: userError, fetchUser } = useUser();
   const {
     register,
     handleSubmit,
@@ -48,10 +49,11 @@ export default function SignUpPage() {
     if (error) {
       toast.error(error, { toastId: "sign-up-error" });
     }
-  }, [error]);
+  }, [error, userError]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     await signUp(data);
+    await fetchUser();
   };
 
   return (
@@ -115,7 +117,7 @@ export default function SignUpPage() {
             <Button
               type="submit"
               className="justify-center mt-4"
-              isLoading={isLoading}
+              isLoading={isLoading || isUserLoading}
             >
               Sign Up
             </Button>

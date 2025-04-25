@@ -4,37 +4,29 @@ import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 import Button from "@/components/generic/Button";
 import Input from "@/components/generic/Input";
 import Logo from "@/components/icons/Logo";
 import { routes } from "@/lib/routes";
+import { SignInCredentials } from "@/service/auth";
+import { signInValidation } from "@/lib/validations";
+import { useAuth } from "@/hooks/useAuth";
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-      "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-    )
-    .required("Password is required"),
-});
-
-type InputFields = yup.InferType<typeof schema>;
+const schema: yup.ObjectSchema<SignInCredentials> = signInValidation;
+type FormData = yup.InferType<typeof schema>;
 
 export default function SignInPage() {
   const router = useRouter();
+  const { signIn, isAuthenticated, error, isLoading } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputFields>({
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       email: "",
@@ -42,9 +34,20 @@ export default function SignInPage() {
     },
   });
 
-  const onSubmit: SubmitHandler<InputFields> = (data) => {
-    console.log(data);
-    // TODO: Implement sign in logic
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push(routes.dashboard.pathname);
+    }
+  }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { toastId: "sign-up-error" });
+    }
+  }, [error]);
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await signIn(data);
   };
 
   return (
@@ -78,7 +81,9 @@ export default function SignInPage() {
                 {...register("password")}
                 error={errors.password?.message}
               />
-              <Button className="justify-center mt-4">Sign In</Button>
+              <Button className="justify-center mt-4" isLoading={isLoading}>
+                Sign In
+              </Button>
               <p className="text-sm">
                 Don&apos;t have an account?{" "}
                 <span

@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { routes } from "./routes";
+import { formatError } from "./error";
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -17,10 +18,14 @@ const createClient = () => {
   client.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response?.status === 401) {
+      if (
+        error.response?.status === 401 &&
+        !window.location.href.includes(routes.signIn.pathname)
+      ) {
         window.location.href = routes.signIn.pathname;
       }
-      return Promise.reject(error);
+      const errorMessage = formatError(error);
+      return Promise.reject(errorMessage);
     }
   );
 

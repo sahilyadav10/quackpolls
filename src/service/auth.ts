@@ -1,5 +1,4 @@
 import { apiClient } from "@/lib/apiClient";
-import { User } from "@/store/slices/authType";
 
 export type SignInCredentials = {
   email: string;
@@ -13,17 +12,12 @@ export type SignUpData = SignInCredentials & {
   gender: string;
 };
 
-export type AuthResponse = {
-  user: User;
-  token: string;
-};
-
 export const signIn = async (credentials: SignInCredentials) => {
-  return await apiClient.post<AuthResponse>("/auth/login", credentials);
+  return await apiClient.post<null>("/auth/login", credentials);
 };
 
 export const signUp = async (userData: SignUpData) => {
-  return await apiClient.post<AuthResponse>("/auth/register", userData);
+  return await apiClient.post<null>("/auth/register", userData);
 };
 
 export const signOut = async (): Promise<void> => {

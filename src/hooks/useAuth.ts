@@ -1,6 +1,6 @@
 import { signIn, SignInCredentials, signUp, SignUpData } from "@/service/auth";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { authActions, authSelectors } from "@/store/slices/authSlice";
+import { authActions, authSelectors } from "@/store/slices/auth/authSlice";
 
 export const useAuth = () => {
   const isAuthenticated = useAppSelector(authSelectors.selectIsAuthenticated);
@@ -17,33 +17,23 @@ export const useAuth = () => {
     signUp: async (signUpFormData: SignUpData) => {
       try {
         dispatch(signInStart());
-        const { data: response } = await signUp({
+        await signUp({
           ...signUpFormData,
         });
-        dispatch(
-          signInSuccess({
-            user: response.user,
-            token: response.token,
-          })
-        );
+        dispatch(signInSuccess());
       } catch (error: any) {
-        dispatch(signInFailure(error?.message || "Login failed"));
+        dispatch(signInFailure(error || "Login failed"));
       }
     },
     signIn: async (signInFormData: SignInCredentials) => {
       try {
         dispatch(signInStart());
-        const { data: response } = await signIn({
+        await signIn({
           ...signInFormData,
         });
-        dispatch(
-          signInSuccess({
-            user: response.user,
-            token: response.token,
-          })
-        );
+        dispatch(signInSuccess());
       } catch (error: any) {
-        dispatch(signInFailure(error?.message || "Login failed"));
+        dispatch(signInFailure(error || "Login failed"));
       }
     },
     logout: () => dispatch(signOut()),
