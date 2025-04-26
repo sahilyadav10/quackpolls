@@ -29,7 +29,6 @@ export default function Input({
             }
             ${className}
           `}
-        value={props.value ?? ""}
         {...props}
       />
       {(error || helperText) && (
