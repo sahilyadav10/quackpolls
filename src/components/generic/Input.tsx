@@ -29,10 +29,11 @@ export default function Input({
             }
             ${className}
           `}
+        value={props.value ?? ""}
         {...props}
       />
       {(error || helperText) && (
-        <p className={`text-sm ${error ? "text-red-400" : "text-neutral-500"}`}>
+        <p className={`text-sm ${error ? "text-red-500" : "text-neutral-500"}`}>
           {error || helperText}
         </p>
       )}
