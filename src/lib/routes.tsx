@@ -26,7 +26,7 @@ export const routes: Routes = {
     isSideBar: true,
   },
   create: {
-    pathname: "/create",
+    pathname: "/polls/create",
     label: "Create",
     icon: <GoPlus className="text-[20px]" strokeWidth={0.6} />,
     isSideBar: true,
