@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, MouseEvent } from "react";
 import LoadingSpinner from "./Loader";
 
-type ButtonVariant = "primary" | "secondary";
+type ButtonVariant = "primary" | "secondary" | "plain";
 type ButtonSize = "sm" | "md";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -13,10 +13,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    "bg-primary text-neutral-800 hover:brightness-95 hover:shadow-md font-semibold",
+  primary: "bg-primary text-neutral-800 hover:brightness-95 font-semibold",
   secondary:
-    "bg-secondary border border-neutral-200 text-neutral-800 hover:shadow-md hover:brightness-95 font-semibold",
+    "bg-neutral-100 text-neutral-800 border border-neutral-200 hover:brightness-95 font-semibold",
+  plain: "font-semibold",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
