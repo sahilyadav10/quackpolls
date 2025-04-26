@@ -22,19 +22,19 @@ export const routes: Routes = {
   dashboard: {
     pathname: "/dashboard",
     label: "Dashboard",
-    icon: <GoHome className="text-[20px]" strokeWidth={0.6} />,
+    icon: <GoHome className="text-[20px]" strokeWidth={0.4} />,
     isSideBar: true,
   },
   create: {
     pathname: "/polls/create",
     label: "Create",
-    icon: <GoPlus className="text-[20px]" strokeWidth={0.6} />,
+    icon: <GoPlus className="text-[20px]" strokeWidth={0.4} />,
     isSideBar: true,
   },
   settings: {
     pathname: "/settings",
     label: "Settings",
-    icon: <RiSettings4Line className="text-[20px]" strokeWidth={0.4} />,
+    icon: <RiSettings4Line className="text-[20px]" strokeWidth={0.1} />,
     isSideBar: true,
   },
 } as const;

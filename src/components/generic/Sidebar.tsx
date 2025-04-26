@@ -15,7 +15,7 @@ export default function Sidebar() {
         {sidebarRoutesArray.map((route) => {
           return (
             <Link
-              className={`flex gap-2 items-center font-medium px-2 md:pl-6 py-2 hover:bg-neutral-200 w-full ${
+              className={`flex gap-2 items-center px-2 md:pl-6 py-2 hover:bg-neutral-200 w-full ${
                 route.pathname === pathname
                   ? "bg-neutral-200 cursor-default"
                   : ""
@@ -31,7 +31,7 @@ export default function Sidebar() {
       </div>
       <div className="hidden md:flex flex-col gap-2 w-full">
         <div className="flex gap-2 items-center font-medium pl-6 py-2">
-          <RxAvatar className="text-[24px]" strokeWidth={0.6} />
+          <RxAvatar className="text-[24px]" strokeWidth={0.2} />
           {user?.firstName} {user?.lastName}
         </div>
       </div>
