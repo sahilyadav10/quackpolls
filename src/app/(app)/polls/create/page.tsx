@@ -38,7 +38,6 @@ export default function Page() {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
     await createPoll(data);
   };
   return (
