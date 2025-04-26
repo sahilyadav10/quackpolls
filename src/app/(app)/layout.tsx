@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <div className="min-h-screen flex">
       <Sidebar />
-      <div className="w-full md:mx-auto my-5 md:max-w-4xl xl:max-w-5xl">
+      <div className="w-full md:mx-auto my-8 md:max-w-4xl xl:max-w-5xl">
         {children}
       </div>
     </div>
