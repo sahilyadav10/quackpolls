@@ -7,7 +7,7 @@ export default function usePolls() {
     queryFn: getPolls,
   });
 
-  const polls = data?.data;
+  const polls = data?.data || [];
 
   return { isPending, isError, polls, error };
 }

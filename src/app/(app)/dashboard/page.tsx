@@ -7,12 +7,14 @@ import Pill from "@/components/generic/Pill";
 import usePolls from "@/hooks/usePolls";
 import { Poll } from "@/types/poll";
 import { isPollActive } from "@/lib/date";
+import EmptyState from "@/components/app/EmptyState";
+import LoadingSpinner from "@/components/generic/LoaderSpinner";
 
 const tabs = ["Public", "Private"];
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState("Public");
-  const { polls } = usePolls();
+  const { polls, isPending } = usePolls();
 
   const columns: ColumnDef<Poll>[] = [
     {
@@ -49,29 +51,38 @@ export default function Page() {
   ];
 
   return (
-    <div className="flex gap-8 flex-col">
+    <div className="flex gap-8 flex-col h-full">
       <div className="flex justify-between items-center">
         <h1 className="font-semibold text-2xl">Your Pond of Polls</h1>
-        <Button>Hatch a New Poll</Button>
+        <Button disabled={isPending}>Start a New Poll</Button>
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-6 border-b border-neutral-200">
-          {tabs.map((tab) => (
-            <div
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`pb-2 font-medium ${
-                activeTab === tab
-                  ? "text-neutral-900 border-b-2 border-neutral-900"
-                  : "text-neutral-400"
-              }`}
-            >
-              {tab}
-            </div>
-          ))}
+      {isPending ? (
+        <LoadingSpinner
+          colour="primary"
+          className="mx-auto mt-44 w-10 h-10 border-3"
+        />
+      ) : polls.length === 0 ? (
+        <EmptyState button={<Button>Start Your First Poll</Button>} />
+      ) : (
+        <div className="flex flex-col gap-4">
+          <div className="flex gap-6 border-b border-neutral-200">
+            {tabs.map((tab) => (
+              <div
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`pb-2 font-medium ${
+                  activeTab === tab
+                    ? "text-neutral-900 border-b-2 border-neutral-900"
+                    : "text-neutral-400"
+                }`}
+              >
+                {tab}
+              </div>
+            ))}
+          </div>
+          <GenericTable columns={columns} data={polls} />
         </div>
-        <GenericTable columns={columns} data={polls || []} />
-      </div>
+      )}
     </div>
   );
 }
