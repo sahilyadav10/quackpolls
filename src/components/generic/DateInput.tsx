@@ -21,9 +21,9 @@ export function DateInput({
         showTimeSelect
         dateFormat="Pp"
         minDate={new Date()}
-        placeholderText="Select date and time"
+        // placeholderText="Select date and time"
         popperPlacement="bottom-start"
-        className="w-full rounded-2xl border border-neutral-200 outline-none bg-white px-4 py-2 text-sm placeholder-neutral-400 focus:ring-2 focus:ring-primary transition"
+        className="w-full rounded-2xl border border-neutral-200 outline-none bg-white px-4 py-2 text-sm focus:ring-2 focus:ring-primary transition"
       />
 
       {error && <p className="text-xs text-red-500">{error}</p>}
