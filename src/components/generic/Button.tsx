@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, MouseEvent } from "react";
-import LoadingSpinner from "./Loader";
+import LoadingSpinner from "./LoaderSpinner";
 
 type ButtonVariant = "primary" | "secondary" | "plain";
 type ButtonSize = "sm" | "md";
