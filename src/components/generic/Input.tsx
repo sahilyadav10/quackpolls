@@ -20,7 +20,7 @@ export default function Input({
         <label className="text-sm font-medium text-neutral-700">{label}</label>
       )}
       <input
-        className={`rounded-2xl transition-all outline-none px-4 py-2
+        className={`bg-white rounded-2xl transition-all outline-none px-4 py-2
            border border-neutral-200 focus:border-primary focus:ring-1 focus:ring-primary w-full
             ${
               error
