@@ -46,7 +46,7 @@ export default function SignUpPage() {
   }, [isAuthenticated, router]);
 
   useEffect(() => {
-    if (error) {
+    if (error || userError) {
       toast.error(error, { toastId: "sign-up-error" });
     }
   }, [error, userError]);

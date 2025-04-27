@@ -14,6 +14,7 @@ import { routes } from "@/lib/routes";
 import { SignInCredentials } from "@/service/auth";
 import { signInValidation } from "@/lib/validations";
 import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@/hooks/useUser";
 
 const schema: yup.ObjectSchema<SignInCredentials> = signInValidation;
 type FormData = yup.InferType<typeof schema>;
@@ -21,6 +22,7 @@ type FormData = yup.InferType<typeof schema>;
 export default function SignInPage() {
   const router = useRouter();
   const { signIn, isAuthenticated, error, isLoading } = useAuth();
+  const { isUserLoading, error: userError, fetchUser } = useUser();
 
   const {
     register,
@@ -41,13 +43,14 @@ export default function SignInPage() {
   }, [isAuthenticated, router]);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error, { toastId: "sign-up-error" });
+    if (error || userError) {
+      toast.error(error, { toastId: "sign-in-error" });
     }
-  }, [error]);
+  }, [error, userError]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     await signIn(data);
+    await fetchUser();
   };
 
   return (
@@ -81,7 +84,10 @@ export default function SignInPage() {
                 {...register("password")}
                 error={errors.password?.message}
               />
-              <Button className="justify-center mt-4" isLoading={isLoading}>
+              <Button
+                className="justify-center mt-4"
+                isLoading={isLoading || isUserLoading}
+              >
                 Sign In
               </Button>
               <p className="text-sm">

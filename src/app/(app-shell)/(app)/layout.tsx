@@ -1,6 +1,6 @@
 import Sidebar from "@/components/generic/Sidebar";
 
-export default function RootLayout({
+export default function AppRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
