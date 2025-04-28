@@ -26,8 +26,8 @@ export default function Page() {
       }
       return true;
     });
-  }, [activeTab]);
-
+  }, [activeTab, polls]);
+  console.log(filteredPolls);
   const columns: ColumnDef<Poll>[] = [
     {
       accessorKey: "question",
