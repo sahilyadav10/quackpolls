@@ -20,7 +20,8 @@ const createClient = () => {
     (error) => {
       if (
         error.response?.status === 401 &&
-        !window.location.href.includes(routes.signIn.pathname)
+        !window.location.href.includes(routes.signIn.pathname) &&
+        !window.location.href.includes(routes.signUp.pathname)
       ) {
         window.location.href = routes.signIn.pathname;
       }

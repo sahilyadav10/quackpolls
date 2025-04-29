@@ -13,7 +13,9 @@ export default function ClientAuth({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const isAuthPage = pathname.includes(routes.signIn.pathname);
+  const isAuthPage =
+    pathname.includes(routes.signIn.pathname) ||
+    pathname.includes(routes.signUp.pathname);
   const { isAuthenticated, hasInitializedAuth, recheckAuth, refreshAuth } =
     useAuth();
 
