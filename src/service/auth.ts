@@ -23,3 +23,7 @@ export const signUp = async (userData: SignUpData) => {
 export const signOut = async (): Promise<void> => {
   return await apiClient.post("/auth/logout");
 };
+
+export const refreshToken = async (): Promise<void> => {
+  return await apiClient.post("/auth/refresh");
+};

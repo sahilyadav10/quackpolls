@@ -1,32 +1,45 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { AuthState } from "./authType";
+import { createSlice } from "@reduxjs/toolkit";
+import { AuthState } from "./authType";
 
 const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  hasInitializedAuth: false,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    signInStart: (state) => {
+    initializeAuthStart: (state) => {
       state.isLoading = true;
+      state.hasInitializedAuth = false;
       state.error = null;
     },
-    signInSuccess: (state) => {
+    initializeAuthSuccess: (state) => {
       state.isAuthenticated = true;
       state.isLoading = false;
+      state.hasInitializedAuth = true;
       state.error = null;
     },
-    signInFailure: (state, action: PayloadAction<string>) => {
+    initializeAuthFailure: (state) => {
+      state.isAuthenticated = false;
       state.isLoading = false;
-      state.error = action.payload;
+      state.hasInitializedAuth = true;
+      state.error = null;
+    },
+    // Refresh should be silent
+    refreshAuthSuccess: (state) => {
+      state.isAuthenticated = true;
+    },
+    refreshAuthFailure: (state) => {
+      state.isAuthenticated = false;
     },
     signOut: (state) => {
       state.isAuthenticated = false;
       state.isLoading = false;
+      state.hasInitializedAuth = true;
       state.error = null;
     },
   },
@@ -37,6 +50,8 @@ const selectIsAuthenticated = (state: { auth: AuthState }) =>
   state.auth.isAuthenticated;
 const selectIsLoading = (state: { auth: AuthState }) => state.auth.isLoading;
 const selectError = (state: { auth: AuthState }) => state.auth.error;
+const selectHasInitializedAuth = (state: { auth: AuthState }) =>
+  state.auth.hasInitializedAuth;
 
 const authReducer = authSlice.reducer;
 export default authReducer;
@@ -45,4 +60,5 @@ export const authSelectors = {
   selectIsAuthenticated,
   selectIsLoading,
   selectError,
+  selectHasInitializedAuth,
 };
