@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { routes } from "@/lib/routes";
@@ -12,18 +12,13 @@ export default function ClientAuth({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const pathname = usePathname();
+  const currentPathname = usePathname();
   const isAuthPage =
-    pathname.includes(routes.signIn.pathname) ||
-    pathname.includes(routes.signUp.pathname);
-  const {
-    isAuthenticated,
-    hasInitializedAuth,
-    recheckAuth,
-    refreshAuth,
-    isLoading,
-  } = useAuth();
+    currentPathname.includes(routes.signIn.pathname) ||
+    currentPathname.includes(routes.signUp.pathname);
+  const [newPathname, setNewPathname] = useState(currentPathname);
 
+  const { isAuthenticated, recheckAuth, refreshAuth, isLoading } = useAuth();
   // run initial auth check
   useEffect(() => {
     recheckAuth();
@@ -31,17 +26,19 @@ export default function ClientAuth({
 
   // redirect once auth is initialized
   useEffect(() => {
-    if (!hasInitializedAuth) return;
+    if (isLoading) return;
 
-    if (isAuthenticated && isAuthPage && isAuthPage) {
-      router.replace("/dashboard");
+    if (isAuthenticated && isAuthPage) {
+      setNewPathname(routes.dashboard.pathname);
+      router.replace(routes.dashboard.pathname);
       return;
     }
 
     if (!isAuthenticated && !isAuthPage) {
+      setNewPathname(routes.signIn.pathname);
       router.replace(routes.signIn.pathname);
     }
-  }, [hasInitializedAuth, isAuthenticated, isAuthPage, router]);
+  }, [isLoading, isAuthenticated, isAuthPage, router]);
 
   // background recheck every 12 minutes
   useEffect(() => {
@@ -53,7 +50,7 @@ export default function ClientAuth({
   }, [refreshAuth]);
 
   // block UI until initial check completes
-  if (!hasInitializedAuth || isLoading) {
+  if (isLoading || newPathname !== currentPathname) {
     return (
       <LoadingSpinner
         colour="primary"

@@ -5,7 +5,6 @@ const initialState: AuthState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
-  hasInitializedAuth: false,
 };
 
 export const authSlice = createSlice({
@@ -14,19 +13,16 @@ export const authSlice = createSlice({
   reducers: {
     initializeAuthStart: (state) => {
       state.isLoading = true;
-      state.hasInitializedAuth = false;
       state.error = null;
     },
     initializeAuthSuccess: (state) => {
       state.isAuthenticated = true;
       state.isLoading = false;
-      state.hasInitializedAuth = true;
       state.error = null;
     },
     initializeAuthFailure: (state) => {
       state.isAuthenticated = false;
       state.isLoading = false;
-      state.hasInitializedAuth = true;
       state.error = null;
     },
     // Refresh should be silent
@@ -39,7 +35,6 @@ export const authSlice = createSlice({
     signOut: (state) => {
       state.isAuthenticated = false;
       state.isLoading = false;
-      state.hasInitializedAuth = true;
       state.error = null;
     },
   },
@@ -50,8 +45,6 @@ const selectIsAuthenticated = (state: { auth: AuthState }) =>
   state.auth.isAuthenticated;
 const selectIsLoading = (state: { auth: AuthState }) => state.auth.isLoading;
 const selectError = (state: { auth: AuthState }) => state.auth.error;
-const selectHasInitializedAuth = (state: { auth: AuthState }) =>
-  state.auth.hasInitializedAuth;
 
 const authReducer = authSlice.reducer;
 export default authReducer;
@@ -60,5 +53,4 @@ export const authSelectors = {
   selectIsAuthenticated,
   selectIsLoading,
   selectError,
-  selectHasInitializedAuth,
 };

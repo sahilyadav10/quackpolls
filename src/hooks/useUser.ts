@@ -15,13 +15,14 @@ export const useUser = () => {
     isUserLoading,
     error,
     user,
-    fetchUser: async () => {
+    fetchUser: async (throwError = false) => {
       try {
         dispatch(fetchUserStart());
         const { data: response } = await getUser();
         dispatch(fetchUserSuccess(response.user));
       } catch (error: any) {
         dispatch(fetchUserFailure(error || "Failed to fetch user details"));
+        if (throwError) throw error;
       }
     },
     clearUser: () => {

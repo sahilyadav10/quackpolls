@@ -8,7 +8,6 @@ import {
   SignUpData,
 } from "@/service/auth";
 import { signOut as signOutApiCall } from "@/service/auth";
-import { getUser } from "@/service/user";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { authActions, authSelectors } from "@/store/slices/auth/authSlice";
 import { userActions } from "@/store/slices/user/userSlice";
@@ -18,11 +17,9 @@ export const useAuth = () => {
   const isAuthenticated = useAppSelector(authSelectors.selectIsAuthenticated);
   const isLoading = useAppSelector(authSelectors.selectIsLoading);
   const error = useAppSelector(authSelectors.selectError);
-  const hasInitializedAuth = useAppSelector(
-    authSelectors.selectHasInitializedAuth
-  );
+
   const dispatch = useAppDispatch();
-  const { clearUser } = useUser();
+  const { fetchUser, error: userError, clearUser } = useUser();
 
   const {
     signOut,
@@ -36,7 +33,7 @@ export const useAuth = () => {
   const recheckAuth = useCallback(async () => {
     dispatch(initializeAuthStart());
     try {
-      await getUser();
+      await fetchUser(true);
       dispatch(initializeAuthSuccess());
     } catch {
       dispatch(initializeAuthFailure());
@@ -57,7 +54,6 @@ export const useAuth = () => {
     isAuthenticated,
     isLoading,
     error,
-    hasInitializedAuth,
     signUp: async (signUpFormData: SignUpData) => {
       dispatch(initializeAuthStart());
       try {
