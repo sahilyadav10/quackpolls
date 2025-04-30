@@ -41,7 +41,7 @@ export default function SignUpPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push(routes.dashboard.pathname);
+      router.push(routes.polls.pathname);
     }
   }, [isAuthenticated, router]);
 

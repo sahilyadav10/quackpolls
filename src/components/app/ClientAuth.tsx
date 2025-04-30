@@ -43,8 +43,8 @@ export default function ClientAuth({
     if (isLoading) return;
 
     if (isAuthenticated && isAuthPage) {
-      setNewPathname(routes.dashboard.pathname);
-      router.replace(routes.dashboard.pathname);
+      setNewPathname(routes.polls.pathname);
+      router.replace(routes.polls.pathname);
       return;
     }
 

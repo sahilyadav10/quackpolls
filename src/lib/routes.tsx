@@ -17,9 +17,9 @@ export const routes = {
     pathname: "/sign-up",
     label: "Sign Up",
   },
-  dashboard: {
-    pathname: "/dashboard",
-    label: "Dashboard",
+  polls: {
+    pathname: "/polls",
+    label: "Polls",
     icon: <GoHome className="text-[20px]" strokeWidth={0.4} />,
     isSideBar: true,
   },
