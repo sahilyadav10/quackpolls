@@ -2,13 +2,18 @@
 import Link from "next/link";
 import { RxAvatar } from "react-icons/rx";
 import { usePathname } from "next/navigation";
+import { MenuItem } from "@headlessui/react";
 
 import { sidebarRoutesArray } from "@/lib/routes";
 import { useUser } from "@/hooks/useUser";
+import { useAuth } from "@/hooks/useAuth";
+import Dropdown from "./Dropdown";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { logout } = useAuth();
   const { user } = useUser();
+
   return (
     <div className="flex w-full md:w-60 border-r border-r-neutral-200 items-start py-4 md:py-8 justify-between md:flex-col flex-row md:overflow-auto overflow-scroll">
       <div className="flex gap-2 w-full justify-between md:flex-col flex-row">
@@ -29,12 +34,24 @@ export default function Sidebar() {
           );
         })}
       </div>
-      <div className="hidden md:flex flex-col gap-2 w-full">
-        <div className="flex gap-2 items-center font-medium pl-6 py-2">
-          <RxAvatar className="text-[24px]" strokeWidth={0.2} />
-          {user?.firstName} {user?.lastName}
-        </div>
-      </div>
+
+      <Dropdown
+        button={
+          <div className="flex gap-2 items-center font-medium pl-6 py-2">
+            <RxAvatar className="text-[24px]" strokeWidth={0.2} />
+            {user?.firstName} {user?.lastName}
+          </div>
+        }
+      >
+        <MenuItem>
+          <div
+            onClick={logout}
+            className="w-full text-left px-4 py-2 hover:bg-neutral-200 hover:cursor-pointer transition"
+          >
+            Logout
+          </div>
+        </MenuItem>
+      </Dropdown>
     </div>
   );
 }

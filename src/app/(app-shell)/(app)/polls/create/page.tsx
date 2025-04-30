@@ -41,11 +41,11 @@ export default function Page() {
     await createPoll(data);
   };
   return (
-    <div className="flex gap-8 flex-col items-center w-2/3 max-[400px] place-self-center">
+    <div className="flex gap-8 flex-col items-center">
       <div className="flex w-full items-start">
         <h1 className="font-semibold text-2xl text-left">Hatch a New Poll</h1>
       </div>
-      <div className="flex flex-col gap-4 w-full bg-white p-8 pr-12 rounded-2xl">
+      <div className="flex flex-col gap-4 w-full">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex gap-6 flex-col"

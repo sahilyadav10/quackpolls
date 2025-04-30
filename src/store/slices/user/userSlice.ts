@@ -40,8 +40,6 @@ const userSlice = createSlice({
         age: undefined,
         gender: undefined,
       };
-      state.isLoading = false;
-      state.error = null;
     },
   },
 });

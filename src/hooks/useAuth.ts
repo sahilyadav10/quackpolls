@@ -7,10 +7,12 @@ import {
   signUp,
   SignUpData,
 } from "@/service/auth";
+import { signOut as signOutApiCall } from "@/service/auth";
 import { getUser } from "@/service/user";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { authActions, authSelectors } from "@/store/slices/auth/authSlice";
 import { userActions } from "@/store/slices/user/userSlice";
+import { useUser } from "./useUser";
 
 export const useAuth = () => {
   const isAuthenticated = useAppSelector(authSelectors.selectIsAuthenticated);
@@ -20,6 +22,7 @@ export const useAuth = () => {
     authSelectors.selectHasInitializedAuth
   );
   const dispatch = useAppDispatch();
+  const { clearUser } = useUser();
 
   const {
     signOut,
@@ -73,8 +76,15 @@ export const useAuth = () => {
         dispatch(initializeAuthFailure(error.message || "Sign-in failed"));
       }
     },
-    logout: () => {
-      dispatch(signOut());
+    logout: async () => {
+      dispatch(initializeAuthStart());
+      try {
+        clearUser();
+        await signOutApiCall();
+        dispatch(signOut());
+      } catch (error: any) {
+        dispatch(initializeAuthFailure(error.message || "Sign-out failed"));
+      }
     },
     recheckAuth,
     refreshAuth,

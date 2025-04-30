@@ -1,3 +1,4 @@
+import { signOut } from "@/service/auth";
 import { getUser } from "@/service/user";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { userActions, userSelectors } from "@/store/slices/user/userSlice";
@@ -18,18 +19,13 @@ export const useUser = () => {
       try {
         dispatch(fetchUserStart());
         const { data: response } = await getUser();
-        dispatch(fetchUserSuccess(response));
+        dispatch(fetchUserSuccess(response.user));
       } catch (error: any) {
         dispatch(fetchUserFailure(error || "Failed to fetch user details"));
       }
     },
-    clearUser: async () => {
-      try {
-        dispatch(fetchUserStart());
-        dispatch(clearUser());
-      } catch (error: any) {
-        dispatch(fetchUserFailure(error || "Login failed"));
-      }
+    clearUser: () => {
+      dispatch(clearUser());
     },
   };
 };

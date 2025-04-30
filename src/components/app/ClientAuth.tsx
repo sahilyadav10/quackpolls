@@ -16,8 +16,13 @@ export default function ClientAuth({
   const isAuthPage =
     pathname.includes(routes.signIn.pathname) ||
     pathname.includes(routes.signUp.pathname);
-  const { isAuthenticated, hasInitializedAuth, recheckAuth, refreshAuth } =
-    useAuth();
+  const {
+    isAuthenticated,
+    hasInitializedAuth,
+    recheckAuth,
+    refreshAuth,
+    isLoading,
+  } = useAuth();
 
   // run initial auth check
   useEffect(() => {
@@ -48,7 +53,7 @@ export default function ClientAuth({
   }, [refreshAuth]);
 
   // block UI until initial check completes
-  if (!hasInitializedAuth) {
+  if (!hasInitializedAuth || isLoading) {
     return (
       <LoadingSpinner
         colour="primary"

@@ -12,3 +12,8 @@ export type UserState = {
   isLoading: boolean;
   error: string | null;
 };
+
+export type UserResponse = {
+  user: User;
+  accessTokenExpiresAt: string;
+};
