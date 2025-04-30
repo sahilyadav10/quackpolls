@@ -13,7 +13,7 @@ const typeStyles = {
   primary: "bg-primary/20 text-primary",
   secondary: "bg-neutral-100 text-neutral-800",
   active: "bg-green-100 text-green-600",
-  inactive: "bg-neutral-100 text-neutral-400",
+  inactive: "bg-neutral-200 text-neutral-600",
 };
 
 export default function Pill({

@@ -27,6 +27,7 @@ export type Poll = {
   options: {
     id: string;
     text: string;
+    voteCount?: number;
   }[];
   public: boolean;
 };
@@ -36,4 +37,9 @@ export type CreatePollRequest = {
   isPublic: boolean;
   closesAt: string; // UTC formatted "2025-04-30T05:30:00"
   options: { text: string }[];
+};
+
+export type VoteRequest = {
+  optionId: string;
+  voterIdentifier: string;
 };

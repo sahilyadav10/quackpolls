@@ -45,7 +45,7 @@ export default function Page() {
         const _isPollActive = isPollActive(closesAt);
         return (
           <Pill
-            variant={row.getValue() ? "active" : "inactive"}
+            variant={_isPollActive ? "active" : "inactive"}
             className="text-sm capitalize"
           >
             {_isPollActive ? "active" : "inactive"}
