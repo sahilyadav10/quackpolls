@@ -40,7 +40,7 @@ export default function ClientAuth({
 
   // redirect once auth is initialized
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading || isAuthenticated === undefined) return;
 
     if (isAuthenticated && isAuthPage) {
       setNewPathname(routes.polls.pathname);
