@@ -51,3 +51,5 @@ export const sidebarRoutesArray = Object.values(routes).filter(
 export const getRoute = (pathname: string): Route | undefined => {
   return Object.values(routes).find((route) => route.pathname === pathname);
 };
+
+export const authRoutes = [routes.signIn.pathname, routes.signUp.pathname];

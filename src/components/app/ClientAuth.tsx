@@ -2,9 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+
 import { useAuth } from "@/hooks/useAuth";
-import { routes } from "@/lib/routes";
+import { authRoutes, routes } from "@/lib/routes";
 import LoadingSpinner from "../generic/LoaderSpinner";
+import { useUser } from "@/hooks/useUser";
+
+const isEitherRouteAuth = ({
+  currentPathname,
+  newPathname,
+}: {
+  currentPathname: string;
+  newPathname: string;
+}) => {
+  return (
+    authRoutes.includes(currentPathname) || authRoutes.includes(newPathname)
+  );
+};
 
 export default function ClientAuth({
   children,
@@ -13,12 +27,12 @@ export default function ClientAuth({
 }) {
   const router = useRouter();
   const currentPathname = usePathname();
-  const isAuthPage =
-    currentPathname.includes(routes.signIn.pathname) ||
-    currentPathname.includes(routes.signUp.pathname);
-  const [newPathname, setNewPathname] = useState(currentPathname);
+  const isAuthPage = authRoutes.includes(currentPathname);
 
+  const [newPathname, setNewPathname] = useState(currentPathname);
   const { isAuthenticated, recheckAuth, refreshAuth, isLoading } = useAuth();
+  const { isUserLoading } = useUser();
+
   // run initial auth check
   useEffect(() => {
     recheckAuth();
@@ -50,7 +64,12 @@ export default function ClientAuth({
   }, [refreshAuth]);
 
   // block UI until initial check completes
-  if (isLoading || newPathname !== currentPathname) {
+  if (
+    isLoading ||
+    isUserLoading ||
+    (newPathname !== currentPathname &&
+      isEitherRouteAuth({ currentPathname, newPathname }))
+  ) {
     return (
       <LoadingSpinner
         colour="primary"
