@@ -30,7 +30,7 @@ export const routes = {
     isSideBar: true,
   },
   results: {
-    pathname: "/polls/{id}",
+    pathname: "/polls/[id]",
     label: "Poll Info",
     isSideBar: false,
   },

@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
 
 import Button from "@/components/generic/Button";
 import GenericTable from "@/components/generic/GenericTable";
@@ -10,10 +11,12 @@ import { Poll } from "@/types/poll";
 import { isPollActive } from "@/lib/date";
 import EmptyState from "@/components/app/EmptyState";
 import LoadingSpinner from "@/components/generic/LoaderSpinner";
+import { routes } from "@/lib/routes";
 
 const tabs = ["all", "public", "private"];
 
 export default function Page() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("all");
   const { polls, isPending } = usePolls();
 
@@ -29,6 +32,7 @@ export default function Page() {
   }, [activeTab, polls]);
 
   const columns: ColumnDef<Poll>[] = [
+    // { accessorKey: "id", header: () => null, enableHiding: true },
     {
       accessorKey: "question",
       header: "Poll Name",
@@ -36,12 +40,12 @@ export default function Page() {
     {
       accessorKey: "closesAt",
       header: "Status",
-      cell: (info) => {
-        const closesAt = info.getValue() as string;
+      cell: (row) => {
+        const closesAt = row.getValue() as string;
         const _isPollActive = isPollActive(closesAt);
         return (
           <Pill
-            variant={info.getValue() ? "active" : "inactive"}
+            variant={row.getValue() ? "active" : "inactive"}
             className="text-sm capitalize"
           >
             {_isPollActive ? "active" : "inactive"}
@@ -56,8 +60,17 @@ export default function Page() {
     {
       accessorKey: "actions",
       header: "Actions",
-      cell: (info) => (
-        <span className="text-primary underline">View Results</span>
+      cell: ({ row }) => (
+        <span
+          className="text-primary underline cursor-pointer"
+          onClick={() => {
+            router.push(
+              routes.results.pathname.replace("[id]", row.original.id as string)
+            );
+          }}
+        >
+          View Results
+        </span>
       ),
     },
   ];

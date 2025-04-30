@@ -11,3 +11,7 @@ export const createPoll = async (data: PollForm) => {
 
   return await apiClient.post<Poll>("/polls", transformedData);
 };
+
+export const getPoll = async (id: string) => {
+  return await apiClient.get<Poll>(`/polls/${id}`);
+};
