@@ -25,7 +25,7 @@ export default function Features() {
           type="feature"
           icon={<HiChartPie color="#10B981" size={30} />}
           heading="Real-time Results"
-          description="Get ready for a flood of responses OR Watch those responses come splashing in"
+          description="Watch those responses come splashing in"
           className="flex-1/3"
         />
         <Card

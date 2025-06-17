@@ -68,7 +68,7 @@ export default function ClientAuth({
     isLoading ||
     isUserLoading ||
     (newPathname !== currentPathname &&
-      isEitherRouteAuth({ currentPathname, newPathname }))
+      !isEitherRouteAuth({ currentPathname, newPathname }))
   ) {
     return (
       <LoadingSpinner
