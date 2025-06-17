@@ -13,15 +13,15 @@ export type SignUpData = SignInCredentials & {
 };
 
 export const signIn = async (credentials: SignInCredentials) => {
-  return await apiClient.post<null>("/auth/login", credentials);
+  return await apiClient.post<null>("/auth/sign-in", credentials);
 };
 
 export const signUp = async (userData: SignUpData) => {
-  return await apiClient.post<null>("/auth/register", userData);
+  return await apiClient.post<null>("/auth/sign-up", userData);
 };
 
 export const signOut = async (): Promise<void> => {
-  return await apiClient.post("/auth/logout");
+  return await apiClient.post("/auth/sign-out");
 };
 
 export const refreshToken = async (): Promise<void> => {
